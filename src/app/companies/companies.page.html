@@ -7,6 +7,7 @@
       Companies
     </ion-title>
   </ion-toolbar>
+  <ion-searchbar (input)="searchCompanies($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
@@ -16,7 +17,7 @@
       Add Company
     </ion-button>
   </div>
-  <ion-card *ngFor="let company of data">
+  <ion-card *ngFor="let company of data; let i = index;">
       <h6><b>{{company.companyName}}, {{company.location}} <span class="count">({{company.count}})</span></b></h6>
       <!-- <ion-card-subtitle class="count">Interviews ({{company.count}})</ion-card-subtitle> -->
       <ion-card-subtitle class="date">Last Interview On: <b>{{company.lastUpdatedDate}}</b></ion-card-subtitle>
