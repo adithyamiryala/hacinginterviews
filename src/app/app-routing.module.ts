@@ -14,7 +14,8 @@ const routes: Routes = [
   { 
     path: 'interviews', 
     loadChildren: './interviews/interviews.module#InterviewsPageModule' 
-  }
+  },  { path: 'interview-dialog', loadChildren: './interview-dialog/interview-dialog.module#InterviewDialogPageModule' }
+
 ];
 
 @NgModule({

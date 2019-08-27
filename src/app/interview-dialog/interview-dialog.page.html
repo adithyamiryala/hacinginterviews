@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Add Interview
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="interviewForm" (ngSubmit)="onSubmit(interviewForm.value)">
+    <ion-item>
+      <ion-label position="floating">Company Name</ion-label>
+      <ion-input type="text" formControlName="companyName" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Years of Experience</ion-label>
+      <ion-select interface="popover" formControlName="yearsOfExpr" required>
+        <ion-select-option value="0">Fresher</ion-select-option>
+        <ion-select-option value="1">1</ion-select-option>
+        <ion-select-option value="2">2</ion-select-option>
+        <ion-select-option value="3">3</ion-select-option>
+        <ion-select-option value="4">4</ion-select-option>
+        <ion-select-option value="5">5</ion-select-option>
+        <ion-select-option value="6">5+</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Position Interviewed</ion-label>
+      <ion-select interface="popover" formControlName="position" required>
+        <ion-select-option value="AS">Associate Software Engineer</ion-select-option>
+        <ion-select-option value="SE">Software Engineer</ion-select-option>
+        <ion-select-option value="SS">Senior Software Engineer</ion-select-option>
+        <ion-select-option value="TL">Team Lead</ion-select-option>
+        <ion-select-option value="AM">Assistant Manager</ion-select-option>
+        <ion-select-option value="MG">Manager</ion-select-option>
+        <ion-select-option value="SM">Senior Manager</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Tell us about your interview</ion-label>
+      <ion-textarea formControlName="aboutInterview" placeholder="About your interview.." rows="4" required></ion-textarea>
+    </ion-item>
+
+    <ion-item id="smileys">
+      <ion-label position="stacked">How was the interview?</ion-label>
+      <input type="radio" formControlName="feedback" value="sad" class="sad">
+	    <input type="radio" formControlName="feedback" value="neutral" class="neutral">
+	    <input type="radio" formControlName="feedback" value="happy" class="happy" checked="checked">
+    </ion-item>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button block color="secondary">
+          Add Interview
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
