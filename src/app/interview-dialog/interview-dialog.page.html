@@ -10,28 +10,36 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="interviewForm" (ngSubmit)="onSubmit(interviewForm.value)">
+  <form [formGroup]="interviewForm">
     <ion-item>
-      <ion-label position="floating">Company Name</ion-label>
-      <ion-input type="text" formControlName="companyName" required></ion-input>
+      <ion-label position="floating">Company Name<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input type="text" formControlName="companyName" placeholder="Company Name.." required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Years of Experience</ion-label>
-      <ion-select interface="popover" formControlName="yearsOfExpr" required>
+      <ion-label position="floating">Years of Experience<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select formControlName="yearsOfExpr" value="0" required>
         <ion-select-option value="0">Fresher</ion-select-option>
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
         <ion-select-option value="3">3</ion-select-option>
         <ion-select-option value="4">4</ion-select-option>
         <ion-select-option value="5">5</ion-select-option>
-        <ion-select-option value="6">5+</ion-select-option>
+        <ion-select-option value="6">6</ion-select-option>
+        <ion-select-option value="7">7</ion-select-option>
+        <ion-select-option value="8">8</ion-select-option>
+        <ion-select-option value="9">9</ion-select-option>
+        <ion-select-option value="10">10</ion-select-option>
+        <ion-select-option value="11">10+</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Position Interviewed</ion-label>
-      <ion-select interface="popover" formControlName="position" required>
+      <ion-label position="floating">Position Interviewed<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select formControlName="position" value="AS" required>
         <ion-select-option value="AS">Associate Software Engineer</ion-select-option>
         <ion-select-option value="SE">Software Engineer</ion-select-option>
         <ion-select-option value="SS">Senior Software Engineer</ion-select-option>
@@ -43,22 +51,42 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Tell us about your interview</ion-label>
-      <ion-textarea formControlName="aboutInterview" placeholder="About your interview.." rows="4" required></ion-textarea>
+      <ion-label position="floating">Tell us about your interview <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-textarea formControlName="aboutInterview" placeholder="About your interview.." rows="4" required>
+      </ion-textarea>
     </ion-item>
 
     <ion-item id="smileys">
-      <ion-label position="stacked">How was the interview?</ion-label>
-      <input type="radio" formControlName="feedback" value="sad" class="sad">
-	    <input type="radio" formControlName="feedback" value="neutral" class="neutral">
-	    <input type="radio" formControlName="feedback" value="happy" class="happy" checked="checked">
+      <ion-label position="stacked">How was the interview? <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <div class="smileys-container">
+        <input type="radio" formControlName="feedback" value="happy" class="happy" checked="checked">
+        <input type="radio" formControlName="feedback" value="neutral" class="neutral">
+        <input type="radio" formControlName="feedback" value="sad" class="sad">
+      </div>
+      <br/>
+    </ion-item>
+
+    <ion-item>
+      <div formArrayName="questionsList">
+        <ion-label position="floating">Questions Asked<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <div *ngFor="let item of questionsList.controls; let pointIndex=index" [formGroupName]="pointIndex">
+          <div class="arrayInput">
+            <ion-input type="text" formControlName="question" placeholder="Add question.."></ion-input>
+            <ion-icon ios="ios-remove-circle" md="md-remove-circle" color="danger" size="large" (click)="deleteQuestion(pointIndex)"></ion-icon>
+          </div>
+        </div>
+        <ion-button color="danger" size="small" (click)="addQuestion()">
+          Add row
+        </ion-button>
+      </div>
     </ion-item>
 
     <ion-row>
       <ion-col text-center>
-        <button ion-button block color="secondary">
-          Add Interview
-        </button>
+        <ion-button color="primary" expand="block" (click)="onSubmit(interviewForm.value)">Submit</ion-button>
       </ion-col>
     </ion-row>
   </form>

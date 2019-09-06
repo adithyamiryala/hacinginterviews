@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { Question } from './questions';
 
 @Component({
   selector: 'app-interview-dialog',
@@ -8,8 +9,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 })
 export class InterviewDialogPage implements OnInit {
 
-
-  interviewForm: any;
+  interviewForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { 
     
@@ -21,8 +21,21 @@ export class InterviewDialogPage implements OnInit {
       yearsOfExpr: new FormControl(''),
       position: new FormControl(''),
       aboutInterview: new FormControl(''),
-      feedback: new FormControl('')
+      feedback: new FormControl(''),
+      questionsList: this.formBuilder.array([this.formBuilder.group({question: ''})])
     })
+  }
+
+  get questionsList() {
+    return this.interviewForm.get('questionsList') as FormArray;
+  }
+
+  addQuestion() {
+    this.questionsList.push(this.formBuilder.group({question:''}));
+  }
+
+  deleteQuestion(index) {
+    this.questionsList.removeAt(index);
   }
 
   onSubmit(values){
